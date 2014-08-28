@@ -1,0 +1,5 @@
+(1)  int*    :int类型的指针
+
+(2)in t=10  
+   int * point   -----> *point表示指向的值  point表示的是地址
+   point =&t     -----> *是个从地址里取值的符号 

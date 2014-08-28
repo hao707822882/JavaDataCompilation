@@ -1,0 +1,32 @@
+记是记不住 的，即便是每天都在用的东西，也有貌似熟悉其实很陌生的时候，或者说根本就是不熟悉。于是需要拿出来经常翻翻，比如我们的SVN账户配置，很简单的一个 case，你可能是svn使用高手，但不一定记得怎么去修改SVN下的账号设置。一般我们都是长期使用自己的svn账号，但是由于需要或者某些情况，需要 我们切换svn账号，那就有点麻烦了。
+ 
+
+    由于在svn 的界面中并没有为我们提供直接更换用户名密码的地方，所以一旦我们需要更换用户名的就需要自己想一些办法。
+ 
+
+    Case1：
+    在Eclipse 使用SVN 的过程中大多数人往往习惯把访问SVN 的用户名密码自动保存起来以便下次自动使用，不要再次手工输入，但是有些时候需要变更密码或者用户名，这时候怎么办？在网上查找后发现如下方法： 
+
+    1. 查看你的Eclipse 中使用的是什么SVN Interface ，在windows > preference > Team > SVN #SVN Interface (右侧中下方) 查看，我是用的JavaHL。
+
+    2. 如果是用的JavaHL, 找到以下目录并删除auth目录下的文件.（ 这里需要注意，如果只是暂时性的，建议提前备份权限文件。）
+   Windows 7：C:\Users\"你的用户名"\AppData\Roaming\Subversion\auth\
+   XP：C:\Documents and Settings\"你的用户名"\Application Data(隐藏文件夹)\"Subversion\auth"  
+
+   3. 如果你用的SVNKit, 找到以下目录并删除.keyring文件。[eclipse ]"configuration"org.eclipse .core.runtime    
+ 
+    Case2：
+
+    TortoiseSVN下更改账号： 在TortoiseSVN的设置里面Saved Data选项中有一个Authentication data的clear按钮用来清除保存在本地的用户验证信息，点一下确定，重新与SVN服务器连接的时候会自动提示输入用户名和密码。
+
+ 
+ 
+    还是有图形化界面的TortoiseSVN操作性更强一些，是svn插件所比拟不了的。
+   
+    主流的版本管控软件这样配置使用就可以，关于修改svn账户密码的方法大概可以分为两种，一种是删除SVN客户端的账号配置文件；另外一种就是去SVN服务端将账号设置成不可用:
+   
+    1、通过删除SVN客户端的账号配置文件，找到我们使用的客户端配置文件，在window xp下面他们的位置在系统盘的 Documents and Settings\alex\Application Data\Subversion\auth\文件夹中，把里面的所有文件删除。  
+   
+     2、通过修改SVN服务端账号配置文件，找到服务端账号配置文件，这个文件位于SVN服务器的安装路径 config文件夹，打开并编辑passwd文件，删除或注释需要被替换的账号。
+ 
+     随笔，mark .

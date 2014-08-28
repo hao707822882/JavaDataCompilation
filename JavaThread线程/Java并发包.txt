@@ -1,0 +1,108 @@
+5. 原子字段更新程序
+在一个多线程环境中递增或递减一个原语类型时，使用在 java.util.concurrent.atomic 包中找到的其中一个新原子类比编写自己的同步代码块要好得多。原子类确保某些操作以线程安全方式被执行，比如递增和递减一个值，更新一个值，添加一个值。原子类列表包括 AtomicInteger、AtomicBoolean、AtomicLong、AtomicIntegerArray 等等。
+使用原子类的难题在于，所有类操作，包括 get、set 和一系列 get-set 操作是以原子态呈现的。这表示，不修改原子变量值的 read和 write 操作是同步的，不仅仅是重要的 read-update-write 操作。如果您希望对同步代码的部署进行更多细粒度控制，那么解决方案就是使用一个原子字段更新程序。
+使用原子更新
+像 AtomicIntegerFieldUpdater、AtomicLongFieldUpdater 和 AtomicReferenceFieldUpdater 之类的原子字段更新程序基本上是应用于易失性字段的封装器。Java 类库在内部使用它们。虽然它们没有在应用程序代码中得到广泛使用，但是也没有不能使用它们的理由。
+清单 2 展示一个有关类的示例，该类使用原子更新来更改某人正在读取的书目：
+
+清单 2. Book 类
+				
+package com.geeckap.atomicexample;
+
+public class Book
+{
+    private String name;
+
+    public Book()
+    {
+    }
+
+    public Book( String name )
+    {
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName( String name )
+    {
+        this.name = name;
+    }
+}
+Book 类仅是一个 POJO（Java 原生类对象），拥有一个单一字段：name。
+
+清单 3. MyObject 类
+				
+package com.geeckap.atomicexample;
+
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
+
+/**
+ *
+ * @author shaines
+ */
+public class MyObject
+{
+    private volatile Book whatImReading;
+
+    private static final AtomicReferenceFieldUpdater<MyObject,Book> updater =
+            AtomicReferenceFieldUpdater.newUpdater( 
+                       MyObject.class, Book.class, "whatImReading" );
+
+    public Book getWhatImReading()
+    {
+        return whatImReading;
+    }
+
+    public void setWhatImReading( Book whatImReading )
+    {
+        //this.whatImReading = whatImReading;
+        updater.compareAndSet( this, this.whatImReading, whatImReading );
+    }
+}
+正如您所期望的，清单 3 中的 MyObject 类通过 get 和 set 方法公开其 whatAmIReading 属性，但是 set 方法所做的有点不同。它不仅仅将其内部 Book 引用分配给指定的 Book（这将使用 清单 3 中注释出的代码来完成），而是使用一个AtomicReferenceFieldUpdater。
+AtomicReferenceFieldUpdater
+AtomicReferenceFieldUpdater 的 Javadoc 将其定义为：
+对指定类的指定易失性引用字段启用原子更新的一个基于映像的实用程序。该类旨在用于这样的一个原子数据结构中：即同一节点的若干引用字段独立地得到原子更新。
+在 清单 3 中，AtomicReferenceFieldUpdater 由一个对其静态 newUpdater 方法的调用创建，该方法接受三个参数：
+包含字段的对象的类（在本例中为 MyObject）
+将得到原子更新的对象的类（在本例中是 Book）
+将经过原子更新的字段的名称
+这里真正的价值在于，getWhatImReading 方法未经任何形式的同步便被执行，而 setWhatImReading 是作为一个原子操作执行的。
+清单 4 展示如何使用 setWhatImReading() 方法并断定值的变动是正确的：
+
+清单 4. 演习原子更新的测试用例
+				
+package com.geeckap.atomicexample;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+public class AtomicExampleTest
+{
+    private MyObject obj;
+
+    @Before
+    public void setUp()
+    {
+        obj = new MyObject();
+        obj.setWhatImReading( new Book( "Java 2 From Scratch" ) );
+    }
+
+    @Test
+    public void testUpdate()
+    {
+        obj.setWhatImReading( new Book( 
+                "Pro Java EE 5 Performance Management and Optimization" ) );
+        Assert.assertEquals( "Incorrect book name", 
+                "Pro Java EE 5 Performance Management and Optimization", 
+                obj.getWhatImReading().getName() );
+    }
+
+}
+
+参阅 参考资料 了解有关原子类的更多信息。

@@ -1,0 +1,42 @@
+  字节数组的比较
+  public static int compareBytes(byte[] b1, int s1, int l1,
+                                 byte[] b2, int s2, int l2) {
+    int end1 = s1 + l1;
+    int end2 = s2 + l2;
+    for (int i = s1, j = s2; i < end1 && j < end2; i++, j++) {
+      int a = (b1[i] & 0xff);
+      int b = (b2[j] & 0xff);
+      if (a != b) {
+        return a - b;
+      }
+    }
+    return l1 - l2;
+  }
+	写一个定长的数据  例：Long类型的
+     public final void writeLong(long v) throws IOException {
+        writeBuffer[0] = (byte)(v >>> 56);
+        writeBuffer[1] = (byte)(v >>> 48);
+        writeBuffer[2] = (byte)(v >>> 40);
+        writeBuffer[3] = (byte)(v >>> 32);
+        writeBuffer[4] = (byte)(v >>> 24);
+        writeBuffer[5] = (byte)(v >>> 16);
+        writeBuffer[6] = (byte)(v >>>  8);
+        writeBuffer[7] = (byte)(v >>>  0);
+        out.write(writeBuffer, 0, 8);
+        incCount(8);
+    }
+
+	读一个定长的数据  例：Long类型的
+    private byte readBuffer[] = new byte[8];
+
+    public final long readLong() throws IOException {
+        readFully(readBuffer, 0, 8);
+        return (((long)readBuffer[0] << 56) +
+                ((long)(readBuffer[1] & 255) << 48) +
+                ((long)(readBuffer[2] & 255) << 40) +
+                ((long)(readBuffer[3] & 255) << 32) +
+                ((long)(readBuffer[4] & 255) << 24) +
+                ((readBuffer[5] & 255) << 16) +
+                ((readBuffer[6] & 255) <<  8) +
+                ((readBuffer[7] & 255) <<  0));
+    }

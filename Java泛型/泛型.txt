@@ -1,0 +1,5 @@
+java中的泛型作用
+
+
+（1）用在类名后 public class<T [T extends ？]>用作方法的参数的类型
+（2）public <T> void f(T x)   方法泛型

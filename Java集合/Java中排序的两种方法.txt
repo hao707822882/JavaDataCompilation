@@ -1,0 +1,2 @@
+(1)在自己的对象中实现comparable结构  ----->>>实现compare（）方法
+(2)自己定义一个排序类  实现comparator接口   其中有排序方法  Collections.sort()有几个重载函数，

@@ -1,0 +1,15 @@
+FileReader reader = new FileReader(file);
+////////////////////////////////////////         
+   char[] dates = new char[1024];
+            int count = 0;
+            StringBuilder sb = new StringBuilder();
+            while((count = reader.read(dates)) > 0){
+                String str = String.valueOf(dates, 0, count);
+                sb.append(str);
+            }
+            reader.close();
+////////////////////////////////////////
+            String str = sb.toString().replace(searchStr, replaceStr);
+            FileWriter writer = new FileWriter(file);
+            writer.write(str.toCharArray());
+            writer.close();

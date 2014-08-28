@@ -1,0 +1,9 @@
+  c/c++中的事件监听是怎么实现的(问题)
+  rt包是由哪些java类编译的啊
+(1)通过java的Mbean方法ManagementFactory.getMemoryManagerMXBeans()得到当前虚拟机的管理对象，
+     当然这个管理对象室友局限的，功能没有通过javaTl强（ti（TOOL INTERFACE）是通过c/c++实现的虚拟机管理组件即agent组件）
+     方法看api
+(2)通过jni的方法  可以实现对jvm中运行程序及方法的监测，在通过javah生成遍地代码是，会生成JavaEVM的一个指针，
+     可用于各种用途（是通过c/c++实现的）
+(3)通过javaTL再启动jvm是通过命令加载组件，与虚拟机同时结束（主要用于开发，调试，监控状态的工具）
+(4)虚拟机是c/c++实现的本生就具有实践监听机制  

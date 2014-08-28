@@ -1,0 +1,25 @@
+从上面的说明中，可以得到几条结论：wait/notify/notifyAll操作需要放在synchronized
+代码块或方法中，这样才能保证在执行  wait/notify/notifyAll的时候，当前线程已经
+获得了所需要的锁(synchronized就是给代码块或对象加锁已达到同步)
+当对于某个对象的等待集合中的线程数目没有把握的时候，最
+好使用  notifyAll而不是notify。notifyAll虽然会导致线程在没有必要的情况下被唤醒
+而产生性能影响，但是在使用上更加简单一些：
+private Object lock = new Object();
+synchronized (lock) { 
+while (/* 逻辑条件不满足的时候 */) {  
+try { 
+lock.wait(); 
+} catch (InterruptedException e) {} 
+} 
+//处理逻辑
+} 
+
+
+
+线程的中断：通过一个线程对象的interrupt()方  法可以向该线程发出一个中断请求，但执不执行得看线程是否相应。
+
+通过isInterrupted()方法可以判断是否有中断请求发生。
+如果当中断请求发生的时候，线程正处于阻塞状态，那么这个中断请求会导致该线程退出阻塞状态。
+可能造成线程处于阻塞状态的情况有：当线程通过调用wait()方法进入一个对象的等待集合中，
+或是通过sleep()方法来暂时休眠，
+或是通过join()方法来等待另外一个线程完成的时候

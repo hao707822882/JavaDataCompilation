@@ -1,0 +1,64 @@
+1.JDBC-ODBC：
+    String Driver="sun.jdbc.odbc.JdbcOdbcDriver";  
+        String URL="jdbc:odbc:dbsource";    //dbsource为数据源名  
+        String Username="username";    //用户名  
+        String Password="password";    //密码  
+        Class.forName(Driver).newInstance();      
+        Connection con=DriverManager.getConnection(URL,Username,Password); 2.Oracle(thin模式):
+    String Driver="oracle.jdbc.driver.OracleDriver";//连接数据库的方法  
+    String URL="jdbc:oracle:thin:@loaclhost:1521:orcl";//orcl为数据库的SID  
+    String Username="username";    //用户名  
+    String Password="password";    //密码  
+    Class.forName(Driver).newInstance();    //加载数据库驱动  
+    Connection con=DriverManager.getConnection(URL,Username,Password);  
+3.MySQL：
+    String Driver="com.mysql.jdbc.Driver";    //驱动程序  
+    String URL="jdbc:mysql://localhost:3306/db_name";//连接的URL,db_name为数据库名      
+    String Username="username";    //用户名  
+    String Password="password";    //密码  
+    Class.forName(Driver).new Instance();  
+    Connection con=DriverManager.getConnection(URL,Username,Password);
+
+4.DB2： 
+    String Driver="com.ibm.db2.jdbc.app.DB2.Driver";    
+	//连接具有DB2客户端的Provider实例  
+        //String Driver="com.ibm.db2.jdbc.net.DB2.Driver";    
+	//连接不具有DB2客户端的Provider实例  
+        String URL="jdbc:db2://localhost:5000/db_name";
+	//db_name为数据可名  
+        String Username="username";    //用户名  
+        String Password="password";    //密码  
+        Class.forName(Driver).newInstance();      
+        Connection con=DriverManager.getConnection(URL,Username,Password);
+5.Microsoft SQL Server :
+	String Driver="com.microsoft.jdbc.sqlserver.SQLServerDriver";
+	//连接SQL数据库的方法  
+	String URL="jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=db_name";    	//db_name为数据库名  
+	String Username="username";    //用户名  
+	String Password="password";    //密码  
+	Class.forName(Driver).new Instance();    //加载数据可驱动  
+	Connection con=DriverManager.getConnection(URL,UserName,Password);
+6.Sysbase:
+    String Driver="com.sybase.jdbc.SybDriver";    //驱动程序  
+        String URL="jdbc:Sysbase://localhost:5007/db_name";    //db_name为数据可名  
+        String Username="username";    //用户名  
+        String Password="password";    //密码  
+        Class.forName(Driver).newInstance();      
+        Connection con=DriverManager.getConnection(URL,Username,Password);
+7.PostgreSQL:
+    String Driver="org.postgresql.Driver";
+    //连接数据库的方法  
+    String URL="jdbc:postgresql://localhost/db_name";
+    //db_name为数据可名  
+    String Username="username";    //用户名  
+    String Password="password";    //密码  
+    Class.forName(Driver).newInstance(); 
+8.Informix:
+	String Driver="com.informix.jdbc.IfxDriver";      
+	StringURL="jdbc:Informix-sqli://localhost:1533/db_name:INFORMIXSER=myserver";
+	//db_name为数据可名  
+        String Username="username";    //用户名  
+        String Password="password";    //密码  
+        Class.forName(Driver).newInstance();      
+        Connection con=DriverManager.getConnection(URL,Username,Password);       
+    Connection con=DriverManager.getConnection(URL,Username,Password);      

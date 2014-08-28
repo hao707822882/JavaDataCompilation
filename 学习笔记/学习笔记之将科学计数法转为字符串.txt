@@ -1,0 +1,8 @@
+1.在后台转换
+	DecimalFormat df = new DecimalFormat("#.00");//保留两位小数
+	BigDecimal bg=new BigDecimal("4.1E11");
+	System.out.println(df.format(bg));
+	System.out.println(bg.toPlainString());//将科学计数转为字符串
+2.在jsp页面用js代码转换
+	var sBalance = parseFloat("4.1E11").toString()
+	alert(sBalance);

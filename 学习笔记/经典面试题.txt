@@ -1,0 +1,309 @@
+1. float型float f=3.4是否正确?
+
+答：不正确，应为float f=3.4f
+
+2. 当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递?
+
+答：是引用传递。
+
+3. 在Java中一个类被声明为final类型，表示了什么意思?
+
+答：表示该类不能被继承，意味着它不能再派生出新的子类，不能作为父类被继承，是顶级类。
+
+4. Error与Exception有什么区别?
+
+答：Error(错误)表示系统级的错误和程序不必处理的异常，是Java运行环境中的内部错误或者硬件问题，比如，内存资源不足等，对于这种错误，程序基本无能为力，除了退出运行外别无选择。
+
+Exception(违例)表示需要捕捉或者需要程序进行处理的异常，它处理的是因为程序设计的瑕疵而引起的问题或者在外的输入等引起的一般性问题，是程序必须处理的。
+
+5. 谈谈final, finally的区别。
+
+答：final是修饰符(关键字)如果一个类被声明为final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract，又被声明为final。将变量或方法声明为final，可以保证它们在使用中不被改变。被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final的方法也同样只能使用，不能重载。
+
+Finally是在异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch 子句就会执行，然后控制就会进入 finally 块(如果有的话)，只要有finally语句块，无论程序如何运行，它都必然被执行到。
+
+6. String s = new String(“xyz“);创建了几个String Object?
+
+答：创建了两个，一个字符对象，一个引用对象
+
+7. short s1 = 1; s1 = s1 + 1;有什么错? short s1 = 1; s1 += 1;有什么错?
+
+答：两个错误都是一样的，后者只是加法的写法不一样，两个错误都是因为s1是short型而1是整型相加后数据类型就变为整型了，与s1定义为short型有矛盾，必须进行强制类型转换才正确。
+
+8. 数组有没有length()这个方法? String有没有length()这个方法?
+
+答：数组没有，String有。
+
+9. Overload和Override的区别
+
+答：方法的覆盖(Overriding)和重载(Overloading)是Java多态性的不同表现。覆盖(Overriding)是父类与子类之间多态性的一种表现，重载(Overloading)是一个类中多态性的一种表现。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被覆盖 (Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它而言，父类中的定义如同被“屏蔽”了。如果在一个类中定义了多个同名的方法，它们或有不同的参数个数或有不同的参数类型，则称为方法的重载(Overloading)。Overloaded的方法可以改变返回值的类型。
+
+10. abstract class和interface有什么区别?
+
+答：声明方法的存在而不去实现它的类被叫做抽象类(abstract class)，它用于要创建一个体现某些基本行为的类，并为该类声明方法，但不能在该类中实现该类的情况。不能创建abstract 类的实例。然而可以创建一个变量，其类型是一个抽象类，并让它指向具体子类的一个实例。不能有抽象构造函数或抽象静态方法。Abstract 类的子类为它们父类中的所有抽象方法提供实现，否则它们也是抽象类为。取而代之，在子类中实现该方法。知道其行为的其它类可以在类中实现这些方法
+
+接口(interface)是抽象类的变体。在接口中，所有方法都是抽象的。多继承性可通过实现这样的接口而获得。接口中的所有方法都是抽象的，没有一个有程序体。接口只可以定义static final成员变量。接口的实现与子类相似，除了该实现类不能从接口定义中继承行为。当类实现特殊接口时，它定义(即将程序体给予)所有这种接口的方法。然后，它可以在实现了该接口的类的任何对象上调用接口的方法。由于有抽象类，它允许使用接口名作为引用变量的类型。通常的动态联编将生效。引用可以转换到接口类型或从接口类型转换，instanceof 运算符可以用来决定某对象的类是否实现了接口
+
+11. 构造器Constructor是否可被override?
+
+答：可以。
+
+12. 是否可以继承String类?
+
+答：String类是final类所以不可以继承。
+
+13. 题目如下：
+
+父类：
+
+public class FatherClass  
+  　{  
+public FatherClass()  
+{  
+System.out.println(“FatherClass Create“);  
+}  
+} 
+子类：
+
+public class ChildClass extends FatherClass  
+{  
+public ChildClass()  
+{  
+System.out.println(“ChildClass Create“);  
+}  
+public static void main(String[] args)  
+{  
+FatherClass fc = new FatherClass();  
+ChildClass cc = new ChildClass();  
+}  
+} 
+请问输出结果为：
+
+FatherClass Create+  
+FatherClass Create  
+ChildClass Create 
+14. 多线程有几种实现方法,都是什么?同步有几种实现方法,都是什么?
+
+答：多线程有三种实现方法，分别为：
+
+① 实现Runnable接口，覆盖Run()方法。
+② 继承Thread，覆盖Run()方法。
+③ 继承TimerTask，覆盖Run()方法。
+
+同步的实现是在方法前加synchronized，在调用wait()和notify()。
+
+15. 请说出你所知道的线程同步的方法
+
+答：1. synchronized 方法：通过在方法声明中加入 synchronized关键字来声明 synchronized 方法。
+2. synchronized 块：通过 synchronized关键字来声明synchronized 块。
+
+16. 当一个线程进入一个对象的一个synchronized方法后，其它线程是否可进入此对象的其它方法?
+
+答：不可以。synchronized 方法都必须获得调用该方法的类实例的锁方能执行，否则所属线程阻塞，方法一旦执行，就独占该锁，直到从该方法返回时才将锁释放，此后被阻塞的线程才能获得该锁，重新进入可执行状态。
+
+17. 用Java SOCKET编程，实现简单的Echo功能
+
+如： 客户端从键盘输入 hi (当用户输出exit 退出程序)，服务端响应为 hi(服务器要求为多线程)
+
+解：服务器程序：
+
+import Java.io.*;  
+import Java.net.*;  
+public class MyServer extends Thread{  
+private Socket cq ;  
+public MyServer(Socket cq)  
+{  
+this.cq = cq;  
+}  
+public void run()  
+{  
+try 
+{  
+BufferedReader in=new BufferedReader(new InputStreamReader(cq.getInputStream()));  
+PrintWriter out=new PrintWriter(cq.getOutputStream());  
+while(true)  
+{  
+String str=in.readLine();  
+System.out.println(str);  
+out.println(“message： “+str);  
+out.flush();  
+if(str.equals(“exit“))  
+break;  
+}  
+}  
+catch(IOException e)  
+{  
+System.out.println(e.message());  
+}  
+}  
+public static void main(String[] args) throws IOException{  
+ServerSocket server=new ServerSocket(8009);  
+while(true)  
+{  
+Socket s=server.accept();  
+new MyServer(s).start();  
+}  
+}  
+} 
+客户端程序：
+
+import Java.net.*;  
+import Java.io.*;  
+public class MyClient{  
+public static void main(String[] args)throws Exception  
+{  
+Socket server=new Socket(“localhost“,8009);  
+BufferedReader in=new BufferedReader(new InputStreamReader(server.getInputStream()));  
+PrintWriter out=new PrintWriter(server.getOutputStream());  
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+while(true)  
+{  
+String str=br.readLine();  
+out.println(str);  
+out.flush();  
+if(str.equals(“exit“)){  
+break;  
+}  
+System.out.println(in.readLine());  
+}  
+server.close();  
+}  
+} 
+18.
+
+public class OuterClass {  
+private double d1 = 1.0;  
+//insert code here ~~ line 3  
+} 
+从下列选项中选择两个正确的答案放在 line 3 中(C E)
+A.
+
+class InnerOne{  
+public static double methoda() {return d1;}  
+} 
+B.
+
+public class InnerOne{  
+static double methoda() {return d1;}  
+} 
+C.
+
+private class InnerOne{  
+double methoda() {return d1;}  
+} 
+D.
+
+ static class InnerOne{  
+protected double methoda() {return d1;}  
+} 
+E.
+
+ abstract class InnerOne{  
+public abstract double methoda();  
+} 
+19. STRING与STRINGBUFFER的区别。
+答：STRING的长度是不可变的，一旦一个String对象被创建，包含在这个实例中的内容(“字符串”)不可以被更改，直至这个对象被销毁，因此，指向一个 String对象的变量实质上是一个常量，String对象也被称为常量对象;STRINGBUFFER的长度是可变的，可以通过StringBuffer的append()、insert()、reverse()、setCharAt()、setLength()等方法，可以对这个字符串中的内容修改。如果你对字符串中的内容经常进行操作，特别是内容要修改时，那么使用StringBuffer，如果最后需要String，那么使用StringBuffer的toString()方法
+
+20. Java类实现序例化的方法是?
+答：Java类要实现序列化，对应的类必须先实现Serializable和Externalizable这两种接口，然后就可以调用ObjectOutputStream的witeObject()方法来保存对象以及通过ObjeatInputStream的readObjeact()方法来读取保存的对象。
+
+21. Collection框架中实现比较要实现什么接口?
+答：要实现Comparable接口，并实现这个接口的唯一方法cpmparaTo()，接受一个Object对象，在这个方法中可以定义对象的排序规则。
+
+22. 介绍Java中的Collection 框架结构 , 并画出来。
+〈〉Collection
+〈〉Set
+〈〉List
+HashSet
+Tree set
+ArrayList
+Vector
+
+23. 编程题：列出某文件夹下的所有文件 (文件夹从命令行输入)。
+解：
+
+import Java.io.*;  
+public class listFile  
+{  
+public static void main (String[] args)  
+{  
+String s=““;  
+InputStreamReader ir=new InputStreamReader(System.in);  
+BufferedReader in = new BufferedReader(ir);  
+try {  
+s = in.readLine();  
+File f=new File(s);  
+File[] files=f.listFiles();  
+for(int i=0;i  
+{  
+if(files[i].isFile())  
+{  
+System.out.println(“文件：“+files[i]);  
+}  
+else 
+{  
+System.out.println(“目录：“+files[i]);  
+}  
+}  
+in.close();  
+}  
+catch (IOException e)  
+{  
+e.printStackTrace();  
+}  
+}  
+} 
+24. 编程题：：写一个满足Singleton模式的类出来。
+
+public class SingletonTest  
+{  
+private static SingletonTest sp;  
+private SingletonTest() {}  
+public static SingletonTest getInstance()  
+{  
+if (sp==null)  
+{ sp=new SingletonTest(); }  
+return sp;  
+} 
+25. 编程：编写一个截取字符串的函数，输入为一个字符串和字节数，输出为按字节截取的字符串。 但是要保证汉字不被截半个，如“我ABC”4，应该截为“我AB”，输入“我ABC汉DEF”，6，应该输出为“我ABC”而不是“我ABC+汉的半个”。
+解：
+
+import Java.io.*;  
+class interceptString  
+{  
+String interceptStr;  
+int interceptByte;  
+public interceptString(String str,int bytes)  
+{  
+interceptStr=str;  
+interceptByte=bytes;  
+System.out.println(“字符串为：’“+interceptStr+“’;字节数为：“+interceptByte);  
+}  
+public void interceptIt()  
+{  
+int interceptCount; interceptCount=(interceptStr.length()%interceptByte==0)?        (interceptStr.length()/interceptByte)：   (interceptStr.length()/interceptByte+1);  
+System.out.println(“截取后断数为：“+interceptCount);  
+for (int i=1;i〈=interceptCount ;i++ )  
+{ if (i==interceptCount)  
+{  
+System.out.println(interceptStr.substring((i-1)*interceptByte,interceptStr.length()));  
+} else 
+{  
+System.out.println(interceptStr.substring((i-1)*interceptByte,(i*interceptByte)));  
+}  
+}  
+}  
+public static void main(String[] args)  
+{  
+String s=““;  
+InputStreamReader ir=new InputStreamReader(System.in);  
+BufferedReader in = new BufferedReader(ir);  
+try {  
+s = in.readLine();  
+interceptString ss = new interceptString(s,4);  
+ss.interceptIt();  
+in.close();  
+} catch (IOException e)  
+{ e.printStackTrace();}  
+}  
+}

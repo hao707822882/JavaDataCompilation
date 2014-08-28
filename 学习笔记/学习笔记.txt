@@ -1,0 +1,16 @@
+ＪＳＰ页面
+1.首页必须加
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.2.6.pack.js"></script>
+<jsp:include flush="true" page="/accesstimes.jsp"></jsp:include>
+两条语句，查看访问量
+2.加
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/columnTemplate/activity/2013qm/";
+
+%>
+<base href="<%=basePath%>">
+访问相对路径
+3.加
+<img src="<%=request.getContextPath() %>/columnTemplate/activity/2013qm/images/banner.png" alt="" />
+访问绝对路径

@@ -1,0 +1,13 @@
+£¨1£©£ºÁ÷µÄ¸´ÓÃ
+private byte[] saveStream(InputStream input) throws IOException {
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
+		ReadableByteChannel readChannel = Channels.newChannel(input);
+		ByteArrayOutputStream output = new ByteArrayOutputStream(32 * 1024);
+		WritableByteChannel writeChannel = Channels.newChannel(output);
+		while ((readChannel.read(buffer)) > 0 || buffer.position() != 0) {
+			buffer.flip();
+			writeChannel.write(buffer);
+			buffer.compact();
+		}
+		return output.toByteArray();
+	}

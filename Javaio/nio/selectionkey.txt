@@ -1,0 +1,2 @@
+selectkey有一个附件，你可以将你负责处理的对象作为附件
+附件的添加是通过 socketchannel的rigister完成度额

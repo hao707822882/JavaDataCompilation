@@ -1,0 +1,15 @@
+	String reg="[a-z&&[^abcd]]{3,6}";  --->提供字符串的匹配，在整个字符串中只要匹配  例：“cat”  catmao xxcat中的cat都会匹配
+	\d 表示任意数字
+	\D 表示任意非数字
+	\s 表示任意空格符   \t制表符\n换行符\f换页符\r回车符\0B分页符
+	\S 表示任意非空格
+	\w 表示任意非单词字母
+	\W 表示任意非单词字母
+	？ 表示可能出现一次或一次也不出现
+	+  表示出现一个或者多次
+       （）表示一个整体 例: \\d+.?\\d+  可以写为\\d+(.?\\d+)?
+        *  表示匹配前面的子表达式一次或者多次
+
+
+	 private static Pattern chmodNormalPattern = Pattern.compile("\\G\\s*([ugoa]*)([+=-]+)([rwxX]+)([,\\s]*)\\s*");   匹配包含的  有就行
+	 private static Pattern chmodOctalPattern =Pattern.compile("^\\s*[+]?([0-7]{3})\\s*$");  这个从字符串的头开始匹配  ^表示开头  $表示结尾

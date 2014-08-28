@@ -1,0 +1,112 @@
+1）禁用右键单击功能
+
+如果你想为用户节省网站信息，那么开发者可以使用这段代码——禁用右键单击功能。
+
+<font><font>$(document).ready(function() {
+	//catch the right-click context menu
+	$(document).bind("contextmenu",function(e) {				 
+		//warning prompt - optional
+		alert("No right-clicking!");
+
+		//delete the default context menu
+		return false;
+	});
+});</font></font>
+2）使用jQuery设定文本大小
+
+使用这段代码，用户可根据需求重新设定文本尺寸（增加或减少）。
+
+<font><font>$(document).ready(function() {
+	//find the current font size
+	var originalFontSize = $('html').css('font-size');
+
+	//Increase the text size
+	$(".increaseFont").click(function() {
+		var currentFontSize = $('html').css('font-size');
+		var currentFontSizeNumber = parseFloat(currentFontSize, 10);
+
+		var newFontSize = currentFontSizeNumber*1.2;
+		$('html').css('font-size', newFontSize);
+		return false;
+	});
+
+	//Decrease the Text Size
+	$(".decreaseFont").click(function() {
+		var currentFontSize = $('html').css('font-size');
+		var currentFontSizeNum = parseFloat(currentFontSize, 10);
+
+		var newFontSize = currentFontSizeNum*0.8;
+		$('html').css('font-size', newFontSize);
+		return false;
+	});
+
+	// Reset Font Size
+	$(".resetFont").click(function(){
+	$('html').css('font-size', originalFontSize);
+  });
+});</font></font>
+3）在新窗口打开链接 
+
+使用这段代码会帮助用户在新窗口打开链接，为用户带来更好的用户体验。 
+
+$(document).ready(function() {
+	//select all anchor tags that have http in the href
+	//and apply the target=_blank
+	$("a[href^='http']").attr('target','_blank');
+});
+
+4）更改样式列表
+使用这段代码帮助你更改样式列表。 
+
+$(document).ready(function() {
+	$("a.cssSwap").click(function() { 
+		//swap the link rel attribute with the value in the rel    
+		$('link[rel=stylesheet]').attr('href' , $(this).attr('rel')); 
+	}); 
+5）返回到顶部链接
+
+此代码对于长时间点击单页面非常实用，你可以在重要关头点击“返回顶部”功能。 
+
+$(document).ready(function() {
+	//when the id="top" link is clicked
+	$('#top').click(function() {
+		//scoll the page back to the top
+		$(document).scrollTo(0,500);
+	}
+});
+
+6）获取鼠标指针的X / Y轴
+
+<font><font>$().mousemove(function(e){
+    //display the x and y axis values inside the P element
+    $('p').html("X Axis : " + e.pageX + " | Y Axis " + e.pageY);
+});</font></font>
+
+7）检测当前鼠标坐标 
+
+使用这个脚本，你可以在任何网络浏览器获取鼠标坐标。 
+
+$(document).ready(function() {
+$().mousemove(function(e)
+{
+$('# MouseCoordinates ').html("X Axis Position = " + e.pageX + " and Y Axis Position = " + e.pageY);
+});
+
+8）图片预加载
+
+此段代码帮助用户快速加载图片或网页页面。
+
+<font><font>jQuery.preloadImagesInWebPage = function() 
+{
+     for(var ctr = 0; ctr<arguments.length; ctr++)
+{
+jQuery("").attr("src", arguments[ctr]);
+}
+}
+To use the above method, you can use the following piece of code:
+$.preloadImages("image1.gif", "image2.gif", "image3.gif");
+To check whether an image has been loaded, you can use the following piece of code:
+$('#imageObject').attr('src', 'image1.gif').load(function() {
+alert('The image has been loaded…');
+});</font></font>
+});

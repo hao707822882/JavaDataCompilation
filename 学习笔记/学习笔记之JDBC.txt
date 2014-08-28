@@ -1,0 +1,13 @@
+什么是JDBC，在什么时候会用到它？
+
+    JDBC的全称是Java DataBase Connection，也就是Java数据库连接，我们可以用它来操作关系型数据库。JDBC接口及相关类在java.sql包和javax.sql包里。我们可以用它来连接数据库，执行SQL查询，存储过程，并处理返回的结果。
+
+    JDBC接口让Java程序和JDBC驱动实现了松耦合，使得切换不同的数据库变得更加简单。
+
+JDBC的PreparedStatement是什么？
+
+    PreparedStatement对象代表的是一个预编译的SQL语句。用它提供的setter方法可以传入查询的变量。
+
+    由于PreparedStatement是预编译的，通过它可以将对应的SQL语句高效的执行多次。由于PreparedStatement自动对特殊字符转义，避免了SQL注入攻击，因此应当尽量的使用它。
+
+此外还有：PreparedStatement中如何注入NULL值？Statement中的getGeneratedKeys方法有什么用？PreparedStatement的缺点是什么，怎么解决这个问题？PreparedStatement的缺点是什么，怎么解决这个问题？如何使用JDBC接口来调用存储过程？等问题。

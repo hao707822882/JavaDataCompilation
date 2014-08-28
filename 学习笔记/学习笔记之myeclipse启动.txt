@@ -1,0 +1,3 @@
+ 今天早上打开myeclipse发现打开工作空间打开不了，网上查了一下，以下是解决方法：
+这个方法最近才发现，当你由于在编译工程期间将进程kill掉以后，就会有编译加载“内容”出错，导致在启动的时候无法解析这个“内容”，所以要将该内容清除。如，当你的工程名为“TestProject”，在安装文件夹中（D:\dev_IDE\myeclipse\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\TestProject），有两个文件.markers和.markers.snap，将这两个文件删除。重启Myeclipse，OK了。  
+TestProject是项目名称，删掉项目里的两个文件，然后就ＯＫ了！

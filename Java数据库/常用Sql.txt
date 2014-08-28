@@ -1,0 +1,9 @@
+INSERT INTO name1 VALUE('2121','ming','1111');添加
+SELECT id,NAME,pa FROM name1 WHERE NAME="ming" 查找
+SELECT id,NAME,pa ,(SELECT AVG(id) FROM name2) AS avgid ,(SELECT AVG(pa) FROM name2) AS angpa FROM name1 WHERE id NOT IN(1,2,3,4) 多表联合查询 
+SELECT name1.`id`,name1.`name`,name1.`pa`,name2.`name`,name2.`id` FROM name1 CROSS JOIN name2两张表的数据合并（笛卡尔积）
+SELECT NAME ,n FROM c LEFT JOIN t ON t.`id`=c.`tid` 左关联查询  （不丢失数据）
+SELECT NAME ,n FROM c right JOIN t ON t.`id`=c.`tid` 有关联查询 （不对是数据）
+SELECT NAME ,n FROM c INNER JOIN t ON t.`id`=c.`tid` WHERE t.`id`>ALL(SELECT id FROM t)（条件查询）
+SELECT NAME ,n FROM c INNER JOIN t ON t.`id`=c.`tid` WHERE t.`id`>ANY(SELECT id FROM c)
+SELECT * FROM t UNION  SELECT *FROM t2  合并
